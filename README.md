@@ -12,6 +12,6 @@
 ## Credits and references
 
 ## License
-[Pendulumious](https://github.com/8nhuman8/pendulumious) specific code is distributed under [MIT License](LICENSE).
+[Pendulumious](https://github.com/8nhuman8/pendulumious) specific code is distributed under [MIT License](https://github.com/8nhuman8/pendulumious/blob/master/LICENSE).
 
 Copyright (c) 2020 Artyom Bezmenov
