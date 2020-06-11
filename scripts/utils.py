@@ -8,7 +8,7 @@ from math import sin, cos
 `a_v1` and `a_v2` is angular velocities
 '''
 
-def first_acceleration(g, m1, m2, l1, l2, a1, a2, a_v1, a_v2):
+def first_acceleration(g, m1, m2, l1, l2, a1, a2, a_v1, a_v2) -> float:
     num1 = -g * (2 * m1 + m2) * sin(a1)
     num2 = -m2 * g * sin(a1 - 2 * a2)
     num3 = -2 * sin(a1 - a2) * m2
@@ -19,7 +19,7 @@ def first_acceleration(g, m1, m2, l1, l2, a1, a2, a_v1, a_v2):
 
     return numerator / denominator
 
-def second_acceleration(g, m1, m2, l1, l2, a1, a2, a_v1, a_v2):
+def second_acceleration(g, m1, m2, l1, l2, a1, a2, a_v1, a_v2) -> float:
     num1 = 2 * sin(a1 - a2)
     num2 = (a_v1 * a_v1 * l1 * (m1 + m2))
     num3 = g * (m1 + m2) * cos(a1)
