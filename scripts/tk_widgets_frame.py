@@ -13,13 +13,13 @@ class WidgetsFrame(Frame):
         self.length1 = IntVar(value=100)
         self.length2 = IntVar(value=100)
 
-        self.bg_color_r = IntVar(value=133)
-        self.bg_color_g = IntVar(value=133)
-        self.bg_color_b = IntVar(value=133)
+        self.bg_color_r = IntVar(value=0)
+        self.bg_color_g = IntVar(value=0)
+        self.bg_color_b = IntVar(value=0)
 
-        self.dots_color_r = IntVar(value=0)
-        self.dots_color_g = IntVar(value=0)
-        self.dots_color_b = IntVar(value=0)
+        self.dots_color_r = IntVar(value=255)
+        self.dots_color_g = IntVar(value=255)
+        self.dots_color_b = IntVar(value=255)
 
         self.trail1_color_r = IntVar(value=255)
         self.trail1_color_g = IntVar(value=0)
@@ -29,17 +29,17 @@ class WidgetsFrame(Frame):
         self.trail2_color_g = IntVar(value=255)
         self.trail2_color_b = IntVar(value=0)
 
-        self.joints_color_r = IntVar(value=255)
-        self.joints_color_g = IntVar(value=255)
-        self.joints_color_b = IntVar(value=255)
+        self.joints_color_r = IntVar(value=177)
+        self.joints_color_g = IntVar(value=177)
+        self.joints_color_b = IntVar(value=177)
 
-        self.set_widgets()
+        self.__set_widgets()
 
         for i in range(4):
             self.grid_columnconfigure(i, weight=1)
 
 
-    def set_widgets(self):
+    def __set_widgets(self):
         Label(self, text='Gravity').grid(row=0, column=0)
         Scale(self, from_=1, to=20, orient=HORIZONTAL, variable=self.gravity).grid(row=0, column=1)
 
