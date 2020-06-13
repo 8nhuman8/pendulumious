@@ -1,6 +1,6 @@
 from pygame import init, QUIT
 from pygame import quit as pygame_quit
-from pygame.event import get
+from pygame.event import get as get_events
 from pygame.time import Clock
 from pygame.display import set_mode, flip
 from pygame.draw import aalines, circle
@@ -50,11 +50,19 @@ length1, length2 = None, None
 angle1, angle2 = randrange(0, 10), randrange(0, 10)
 anglular_velocity1, angular_velocity2 = 0, 0
 trail1, trail2 = [], []
+
+
 running = True
+
+def stop_running():
+    global running
+    running = False
+
+root.protocol('WM_DELETE_WINDOW', stop_running)
 
 
 while running:
-    for event in get():
+    for event in get_events():
         if event.type == QUIT:
             running = False
 
@@ -141,6 +149,8 @@ while running:
 
     flip()
     clock.tick(fps)
+
+    root.update_idletasks()
     root.update()
 
 
@@ -151,5 +161,5 @@ while running:
     angle2 += angular_velocity2
 
 
-pygame_quit
+pygame_quit()
 quit()

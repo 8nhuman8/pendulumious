@@ -3,9 +3,6 @@ from tkinter import Frame, IntVar, Label, Scale, HORIZONTAL
 class WidgetsFrame(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, *args, **kwargs)
-        self.width = kwargs.pop('width')
-        self.height = kwargs.pop('height')
-
 
         self.gravity = IntVar(value=1)
         self.fps = IntVar(value=30)
@@ -35,7 +32,6 @@ class WidgetsFrame(Frame):
         self.joints_color_r = IntVar(value=255)
         self.joints_color_g = IntVar(value=255)
         self.joints_color_b = IntVar(value=255)
-
 
         self.set_widgets()
 
