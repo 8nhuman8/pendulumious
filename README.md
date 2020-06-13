@@ -8,6 +8,7 @@
 
 ## Usage and installation
 1. Upgrade required packages with `pip install -r requirements.txt --upgrade` (if you don't have one, it will be automatically installed).
+2. Run the `app.py` with `python scripts/app.py`.
 
 ## Credits and references
 - All the formulas were taken from [website of Massachusetts Institute of Technology](https://web.mit.edu/jorloff/www/chaosTalk/double-pendulum/double-pendulum-en.html).
