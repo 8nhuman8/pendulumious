@@ -55,6 +55,50 @@ length2_entry = tk.Scale(parameters, from_=50, to=200, orient=tk.HORIZONTAL)
 length2_entry.grid(row=2, column=3)
 length2_entry.set(100)
 
+tk.Label(parameters, text='Background color').grid(row=3, column=0)
+bg_color_r_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+bg_color_r_entry.grid(row=3, column=1)
+bg_color_r_entry.set(133)
+bg_color_g_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+bg_color_g_entry.grid(row=3, column=2)
+bg_color_g_entry.set(133)
+bg_color_b_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+bg_color_b_entry.grid(row=3, column=3)
+bg_color_b_entry.set(133)
+
+tk.Label(parameters, text='Dots color').grid(row=4, column=0)
+dots_color_r_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+dots_color_r_entry.grid(row=4, column=1)
+dots_color_r_entry.set(0)
+dots_color_g_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+dots_color_g_entry.grid(row=4, column=2)
+dots_color_g_entry.set(0)
+dots_color_b_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+dots_color_b_entry.grid(row=4, column=3)
+dots_color_b_entry.set(0)
+
+tk.Label(parameters, text='Trail 1 color').grid(row=5, column=0)
+trail1_color_r_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+trail1_color_r_entry.grid(row=5, column=1)
+trail1_color_r_entry.set(255)
+trail1_color_g_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+trail1_color_g_entry.grid(row=5, column=2)
+trail1_color_g_entry.set(0)
+trail1_color_b_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+trail1_color_b_entry.grid(row=5, column=3)
+trail1_color_b_entry.set(0)
+
+tk.Label(parameters, text='Trail 2 color').grid(row=6, column=0)
+trail2_color_r_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+trail2_color_r_entry.grid(row=6, column=1)
+trail2_color_r_entry.set(0)
+trail2_color_g_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+trail2_color_g_entry.grid(row=6, column=2)
+trail2_color_g_entry.set(255)
+trail2_color_b_entry = tk.Scale(parameters, from_=0, to=255, orient=tk.HORIZONTAL)
+trail2_color_b_entry.grid(row=6, column=3)
+trail2_color_b_entry.set(0)
+
 for i in range(4):
     parameters.grid_columnconfigure(i, weight=1)
 
@@ -70,19 +114,13 @@ screen = pygame.display.set_mode((WIDTH, HEIGTH))
 clock = pygame.time.Clock()
 
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GRAY = (133, 133, 133)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-
 gravity = None
 mass1, mass2 = None, None
 length1, length2 = None, None
 
 angle1, angle2 = randrange(0, 10), randrange(0, 10)
 anglular_velocity1, angular_velocity2 = 0, 0
-scatter1, scatter2 = [], []
+trail1, trail2 = [], []
 running = True
 
 
@@ -98,6 +136,26 @@ while running:
     mass2 = mass2_entry.get()
     length1 = length1_entry.get()
     length2 = length2_entry.get()
+    bg_color = (
+        bg_color_r_entry.get(),
+        bg_color_g_entry.get(),
+        bg_color_b_entry.get()
+    )
+    dots_color = (
+        dots_color_r_entry.get(),
+        dots_color_g_entry.get(),
+        dots_color_b_entry.get()
+    )
+    trail1_color = (
+        trail1_color_r_entry.get(),
+        trail1_color_g_entry.get(),
+        trail1_color_b_entry.get()
+    )
+    trail2_color = (
+        trail2_color_r_entry.get(),
+        trail2_color_g_entry.get(),
+        trail2_color_b_entry.get()
+    )
 
     angular_acceleration1 = first_acceleration(
         gravity,
@@ -120,11 +178,11 @@ while running:
     x2 = int(x1 + length2 * sin(angle2))
     y2 = int(y1 - length2 * cos(angle2))
 
-    scatter1.append(add_offset(x1, y1))
-    scatter2.append(add_offset(x2, y2))
+    trail1.append(add_offset(x1, y1))
+    trail2.append(add_offset(x2, y2))
 
 
-    screen.fill(GRAY)
+    screen.fill(bg_color)
 
     pygame.draw.aalines(
         screen, WHITE, False, [
@@ -134,14 +192,14 @@ while running:
         ]
     )
 
-    if len(scatter1) > 1:
-        pygame.draw.aalines(screen, RED, False, scatter1)
-    if len(scatter2) > 1:
-        pygame.draw.aalines(screen, GREEN, False, scatter2)
+    if len(trail1) > 1:
+        pygame.draw.aalines(screen, trail1_color, False, trail1)
+    if len(trail2) > 1:
+        pygame.draw.aalines(screen, trail2_color, False, trail2)
 
-    pygame.draw.circle(screen, BLACK, ORIGIN, 5)
-    pygame.draw.circle(screen, BLACK, add_offset(x1, y1), mass1)
-    pygame.draw.circle(screen, BLACK, add_offset(x2, y2), mass2)
+    pygame.draw.circle(screen, dots_color, ORIGIN, 5)
+    pygame.draw.circle(screen, dots_color, add_offset(x1, y1), mass1)
+    pygame.draw.circle(screen, dots_color, add_offset(x2, y2), mass2)
 
 
     pygame.display.flip()
