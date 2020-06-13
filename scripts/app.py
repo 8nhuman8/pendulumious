@@ -61,10 +61,13 @@ while running:
 
     gravity = widgets.gravity.get()
     fps = widgets.fps.get()
+
     mass1 = widgets.mass1.get()
     mass2 = widgets.mass2.get()
+
     length1 = widgets.length1.get()
     length2 = widgets.length2.get()
+
     bg_color = (
         widgets.bg_color_r.get(),
         widgets.bg_color_g.get(),
@@ -84,6 +87,11 @@ while running:
         widgets.trail2_color_r.get(),
         widgets.trail2_color_g.get(),
         widgets.trail2_color_b.get()
+    )
+    joints_color = (
+        widgets.joints_color_r.get(),
+        widgets.joints_color_g.get(),
+        widgets.joints_color_b.get()
     )
 
     angular_acceleration1 = first_acceleration(
@@ -114,7 +122,7 @@ while running:
     screen.fill(bg_color)
 
     aalines(
-        screen, (255,255,255), False, [
+        screen, joints_color, False, [
             ORIGIN,
             add_offset(x1, y1),
             add_offset(x2, y2)

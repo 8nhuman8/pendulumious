@@ -32,6 +32,10 @@ class WidgetsFrame(Frame):
         self.trail2_color_g = IntVar(value=255)
         self.trail2_color_b = IntVar(value=0)
 
+        self.joints_color_r = IntVar(value=255)
+        self.joints_color_g = IntVar(value=255)
+        self.joints_color_b = IntVar(value=255)
+
 
         self.set_widgets()
 
@@ -77,3 +81,8 @@ class WidgetsFrame(Frame):
         Scale(self, from_=0, to=255, orient=HORIZONTAL, variable=self.trail2_color_r).grid(row=6, column=1)
         Scale(self, from_=0, to=255, orient=HORIZONTAL, variable=self.trail2_color_g).grid(row=6, column=2)
         Scale(self, from_=0, to=255, orient=HORIZONTAL, variable=self.trail2_color_b).grid(row=6, column=3)
+
+        Label(self, text='Joints color').grid(row=7, column=0)
+        Scale(self, from_=0, to=255, orient=HORIZONTAL, variable=self.joints_color_r).grid(row=7, column=1)
+        Scale(self, from_=0, to=255, orient=HORIZONTAL, variable=self.joints_color_g).grid(row=7, column=2)
+        Scale(self, from_=0, to=255, orient=HORIZONTAL, variable=self.joints_color_b).grid(row=7, column=3)
