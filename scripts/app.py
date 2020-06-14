@@ -3,7 +3,7 @@ from pygame import quit as pygame_quit
 from pygame.event import get as get_events
 from pygame.time import Clock
 from pygame.display import set_mode, flip
-from pygame.draw import aalines, circle
+from pygame.draw import aalines, circle, line, aaline
 from tkinter import Tk, Frame, Button, SUNKEN, RAISED, W, E
 
 from math import sin, cos
@@ -45,7 +45,7 @@ def pause():
 pause_button = Button(widgets, text='Pause', command=pause)
 pause_button.config(relief=SUNKEN)
 pause_button.grid(
-    row=8, column=0,
+    row=10, column=0,
     columnspan=2, sticky=W + E,
     padx=(10,), pady=(10,)
 )
@@ -122,6 +122,15 @@ while running:
             widgets.joints_color_b.get()
         )
 
+        use_fade1 = widgets.use_fade1.get()
+        make_fade_bold1 = widgets.make_fade_bold1.get()
+
+        use_fade2 = widgets.use_fade2.get()
+        make_fade_bold2 = widgets.make_fade_bold2.get()
+
+        fade_length1 = widgets.fade_length1.get()
+        fade_length2 = widgets.fade_length2.get()
+
         angular_acceleration1 = first_acceleration(
             gravity,
             mass1, mass2,
@@ -157,10 +166,52 @@ while running:
             ]
         )
 
-        if len(trail1) > 1:
+        if len(trail1) > 1 and not use_fade1:
             aalines(screen, trail1_color, False, trail1)
-        if len(trail2) > 1:
+        if len(trail2) > 1 and not use_fade2:
             aalines(screen, trail2_color, False, trail2)
+
+        if use_fade1:
+            while len(trail1) > fade_length1:
+                trail1.pop(0)
+            for i in range(len(trail1) - 1):
+
+                r = widgets.trail1_color_r.get() + (len(trail1) - i) * 25
+                g = widgets.trail1_color_g.get() + (len(trail1) - i) * 25
+                b = widgets.trail1_color_b.get() + (len(trail1) - i) * 25
+
+                if r > 255: r = 255
+                if g > 255: g = 255
+                if b > 255: b = 255
+
+                start_position = (int(trail1[i][0]), int(trail1[i][1]))
+                end_position = (int(trail1[i + 1][0]), int(trail1[i + 1][1]))
+
+                if make_fade_bold1:
+                    line(screen, (r, g, b), start_position, end_position, mass1)
+                else:
+                    aaline(screen, (r, g, b), start_position, end_position)
+
+        if use_fade2:
+            while len(trail2) > fade_length2:
+                trail2.pop(0)
+            for i in range(len(trail2) - 1):
+
+                r = widgets.trail2_color_r.get() + (len(trail2) - i) * 25
+                g = widgets.trail2_color_g.get() + (len(trail2) - i) * 25
+                b = widgets.trail2_color_b.get() + (len(trail2) - i) * 25
+
+                if r > 255: r = 255
+                if g > 255: g = 255
+                if b > 255: b = 255
+
+                start_position = (int(trail2[i][0]), int(trail2[i][1]))
+                end_position = (int(trail2[i + 1][0]), int(trail2[i + 1][1]))
+
+                if make_fade_bold2:
+                    line(screen, (r, g, b), start_position, end_position, mass2)
+                else:
+                    aaline(screen, (r, g, b), start_position, end_position)
 
         circle(screen, dots_color, ORIGIN, 5)
         circle(screen, dots_color, add_offset(x1, y1), mass1)
