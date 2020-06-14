@@ -12,7 +12,7 @@ from os import environ
 from platform import system
 
 from utils import first_acceleration, second_acceleration
-from tk_widgets_frame import WidgetsFrame
+from widgets_frame import WidgetsFrame
 
 
 WIDTH, HEIGTH = 500, 500
