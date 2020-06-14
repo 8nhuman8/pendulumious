@@ -16,9 +16,13 @@ from tk_widgets_frame import WidgetsFrame
 
 
 WIDTH, HEIGTH = 500, 500
+
 ORIGIN = (WIDTH // 2, HEIGTH // 3)
 add_offset = lambda x, y: (x + ORIGIN[0], ORIGIN[1] - y)
-pause = True
+
+pause = False
+first_frame_will_be_shown = True
+reset = False
 
 
 root = Tk()
@@ -32,7 +36,7 @@ widgets = WidgetsFrame(root, width=WIDTH, height=HEIGTH)
 widgets.grid(row=0, column=1)
 widgets.grid_propagate(False)
 
-def pause():
+def pause_button_behavior():
     global pause
 
     if pause:
@@ -42,10 +46,21 @@ def pause():
 
     pause = not pause
 
-pause_button = Button(widgets, text='Pause', command=pause)
+def reset_button_behavior():
+    global reset
+    reset = True
+
+pause_button = Button(widgets, text='Pause', command=pause_button_behavior)
 pause_button.config(relief=SUNKEN)
 pause_button.grid(
     row=10, column=0,
+    columnspan=2, sticky=W + E,
+    padx=(10,), pady=(10,)
+)
+
+reset_button = Button(widgets, text='Reset', command=reset_button_behavior)
+reset_button.grid(
+    row=10, column=2,
     columnspan=2, sticky=W + E,
     padx=(10,), pady=(10,)
 )
@@ -81,6 +96,16 @@ root.protocol('WM_DELETE_WINDOW', stop_running)
 
 
 while running:
+    if reset:
+        angle1, angle2 = randrange(0, 10), randrange(0, 10)
+        anglular_velocity1, angular_velocity2 = 0, 0
+        trail1, trail2 = [], []
+
+        pause_button.config(relief=SUNKEN)
+        first_frame_will_be_shown = True
+        reset = False
+
+
     if not pause:
         for event in get_events():
             if event.type == QUIT:
@@ -227,6 +252,11 @@ while running:
 
         angle1 += anglular_velocity1
         angle2 += angular_velocity2
+
+
+    if first_frame_will_be_shown:
+        pause = True
+    first_frame_will_be_shown = False
 
 
     root.update_idletasks()
