@@ -1,7 +1,9 @@
 # Pendulumious
 ### A program for visualizing the famous physical system
 
-![Pendulumious Demo](README_files/demo.gif)
+<p align="center">
+  <img src="README_files/demo.gif" alt="Pendulumious Demo">
+</p>
 
 ## Table of contents
 - [Usage and installation](#usage-and-installation)
