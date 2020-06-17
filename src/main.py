@@ -1,3 +1,8 @@
+from math import sin, cos
+from random import randrange
+from os import environ
+from platform import system
+
 from pygame import init, QUIT
 from pygame import quit as pygame_quit
 from pygame.event import get as get_events
@@ -5,11 +10,6 @@ from pygame.time import Clock
 from pygame.display import set_mode, flip
 from pygame.draw import aalines, circle, line, aaline
 from tkinter import Tk, Frame, Button, SUNKEN, RAISED, W, E
-
-from math import sin, cos
-from random import randrange
-from os import environ
-from platform import system
 
 from utils import first_acceleration, second_acceleration
 from widgets_frame import WidgetsFrame
@@ -67,7 +67,7 @@ reset_button.grid(
 
 
 environ['SDL_WINDOWID'] = str(embed.winfo_id())
-if system == 'Windows':
+if system() == 'Windows':
     environ['SDL_VIDEODRIVER'] = 'windib'
 
 
