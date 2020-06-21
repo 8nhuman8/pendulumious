@@ -2,7 +2,7 @@
 ### A program for visualizing the famous physical system
 
 <p align="center">
-  <img src="README_files/demo.gif" alt="Pendulumious Demo">
+  <img src="docs/README/demo.gif" alt="Pendulumious Demo">
 </p>
 
 ## Table of contents
